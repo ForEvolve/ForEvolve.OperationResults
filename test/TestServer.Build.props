@@ -1,0 +1,9 @@
+<Project>
+  <Import Project="../Dependencies.Build.props" />
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+</Project>
