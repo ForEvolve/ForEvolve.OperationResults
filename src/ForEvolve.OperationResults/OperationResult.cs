@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Text.Json.Serialization;
 
 namespace ForEvolve.OperationResults
 {
@@ -10,15 +12,10 @@ namespace ForEvolve.OperationResults
     public class OperationResult : IOperationResult
     {
         /// <inheritdoc />
-#if SYSTEM_TEXT_JSON
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
+        [JsonIgnore]
         public bool Succeeded => !Messages.HasError();
 
         /// <inheritdoc />
-#if SYSTEM_TEXT_JSON
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
         public MessageCollection Messages { get; } = new MessageCollection();
 
         /// <inheritdoc />
@@ -214,7 +211,7 @@ namespace ForEvolve.OperationResults
     }
 
     /// <summary>
-    /// DELETE ME
+    /// TODO: DELETE ME
     /// </summary>
     class MyClass
     {

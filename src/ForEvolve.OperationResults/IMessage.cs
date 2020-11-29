@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ForEvolve.OperationResults
 {
@@ -24,6 +25,7 @@ namespace ForEvolve.OperationResults
         /// Gets the message type.
         /// </summary>
         /// <value>The type of message.</value>
+        [JsonIgnore]
         Type Type { get; }
 
         /// <summary>

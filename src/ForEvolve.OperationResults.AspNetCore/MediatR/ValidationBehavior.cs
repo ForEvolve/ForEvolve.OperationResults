@@ -64,17 +64,11 @@ namespace ForEvolve.OperationResults.MediatR
             });
         }
 
-        private static OperationMessageLevel Map(Severity severity)
+        private static OperationMessageLevel Map(Severity severity) => severity switch
         {
-            switch (severity)
-            {
-                case Severity.Warning:
-                    return OperationMessageLevel.Warning;
-                case Severity.Info:
-                    return OperationMessageLevel.Information;
-                default:
-                    return OperationMessageLevel.Error;
-            }
-        }
+            Severity.Warning => OperationMessageLevel.Warning,
+            Severity.Info => OperationMessageLevel.Information,
+            _ => OperationMessageLevel.Error,
+        };
     }
 }
