@@ -1,10 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(ForEvolveTargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <Description>This package contains an operation result helpers for Asp.Net Core MVC and MediatR; for example: automatic validation.</Description>
     <PackageTags>forevolve,aspnetcore,mvc,filters,asp.net,core,aspnet,asp,operation,result,results,message,exception</PackageTags>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.6.2" />
