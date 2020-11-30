@@ -11,6 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The services.</param>
         /// <returns>IServiceCollection.</returns>
+        /// <remarks>This subsystem should to be revised.</remarks>
         public static IServiceCollection AddForEvolveOperationResultStandardizer(this IServiceCollection services)
         {
             services
