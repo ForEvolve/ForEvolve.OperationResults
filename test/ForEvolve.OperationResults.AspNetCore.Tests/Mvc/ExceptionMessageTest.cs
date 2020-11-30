@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ForEvolve.OperationResults
+namespace ForEvolve.OperationResults.AspNetCore.Mvc
 {
     public class ExceptionMessageTest
     {

@@ -21,7 +21,7 @@ namespace ForEvolve.OperationResults
                 }
                 catch (Exception ex)
                 {
-                    return OperationResult.Failure(ex);
+                    return ex.ToOperationResult();
                 }
             }
         }

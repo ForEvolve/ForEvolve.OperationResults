@@ -6,7 +6,4 @@
     <PackageTags>forevolve,aspnetcore,asp.net,core,aspnet,asp,operation,result,results,message,exception</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Sdk;
 
 namespace ForEvolve.OperationResults
 {
@@ -30,7 +31,7 @@ namespace ForEvolve.OperationResults
             {
                 // Arrange
                 var exception = new Exception("Some error");
-                var failure = OperationResult.Failure(exception);
+                var failure = OperationResult.Failure(new TestExMessage(exception));
 
                 // Act
                 var result = failure.ConvertTo<OperationResult<object>, object>();
@@ -39,7 +40,7 @@ namespace ForEvolve.OperationResults
                 Assert.NotNull(result);
                 Assert.Collection(result.Messages,
                     m => {
-                        var exceptionMessage = Assert.IsType<ExceptionMessage>(m);
+                        var exceptionMessage = Assert.IsType<TestExMessage>(m);
                         Assert.Same(exception, exceptionMessage.Exception);
                     }
                 );
@@ -66,7 +67,7 @@ namespace ForEvolve.OperationResults
             {
                 // Arrange
                 var exception = new Exception("Some error");
-                var failure = OperationResult.Failure<object>(exception);
+                var failure = OperationResult.Failure<object>(new TestExMessage(exception));
 
                 // Act
                 var result = failure.ConvertTo<OperationResult>();
@@ -76,7 +77,7 @@ namespace ForEvolve.OperationResults
                 Assert.IsType<OperationResult>(result);
                 Assert.Collection(result.Messages,
                     m => {
-                        var exceptionMessage = Assert.IsType<ExceptionMessage>(m);
+                        var exceptionMessage = Assert.IsType<TestExMessage>(m);
                         Assert.Same(exception, exceptionMessage.Exception);
                     }
                 );
@@ -124,9 +125,19 @@ namespace ForEvolve.OperationResults
                 Assert.IsType<OperationResult<ConvertTestClass>>(result);
             }
         }
+
         private class ConvertTestClass
         {
 
+        }
+
+        private class TestExMessage : Message
+        {
+            public Exception Exception { get; }
+
+            public TestExMessage(Exception exception)
+                : base(OperationMessageLevel.Error)
+                => Exception = exception;
         }
     }
 }
