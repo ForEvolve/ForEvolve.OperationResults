@@ -2,9 +2,9 @@
 {
     /// <summary>
     /// Represents the default property value formatter, used by <see cref="DefaultOperationResultStandardizer"/>.
-    /// Implements the <see cref="IoTCore.Api.Devices.IPropertyValueFormatter" />
+    /// Implements the <see cref="IPropertyValueFormatter" />
     /// </summary>
-    /// <seealso cref="IoTCore.Api.Devices.IPropertyValueFormatter" />
+    /// <seealso cref="IPropertyValueFormatter" />
     public class DefaultPropertyValueFormatter : IPropertyValueFormatter
     {
         /// <inheritdoc />

@@ -3,9 +3,9 @@ namespace ForEvolve.OperationResults.Standardizer
 {
     /// <summary>
     /// Represents the default property name formatter, used by <see cref="DefaultOperationResultStandardizer"/>.
-    /// Implements the <see cref="IoTCore.Api.Devices.IPropertyNameFormatter" />
+    /// Implements the <see cref="IPropertyNameFormatter" />
     /// </summary>
-    /// <seealso cref="IoTCore.Api.Devices.IPropertyNameFormatter" />
+    /// <seealso cref="IPropertyNameFormatter" />
     public class DefaultPropertyNameFormatter : IPropertyNameFormatter
     {
         /// <inheritdoc />
