@@ -1,4 +1,4 @@
-﻿using ForEvolve.OperationResults.AspNetCore.Mvc;
+﻿using ForEvolve.OperationResults.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForEvolve.OperationResults.AspNetCore
+namespace ForEvolve.OperationResults.AspNetCore.Mvc
 {
     public class ModelBinderErrorActionFilter : IAsyncActionFilter
     {

@@ -1,5 +1,5 @@
 ﻿using ForEvolve.OperationResults;
-using ForEvolve.OperationResults.AspNetCore.Mvc;
+using ForEvolve.OperationResults.AspNetCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

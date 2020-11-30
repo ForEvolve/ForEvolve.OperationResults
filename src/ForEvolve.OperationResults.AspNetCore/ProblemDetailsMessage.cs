@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForEvolve.OperationResults.AspNetCore.Mvc
+namespace ForEvolve.OperationResults.AspNetCore
 {
     /// <summary>
     /// Represents an operation result message build around [RFC3986] <see cref="OperationResults.ProblemDetails"/>.

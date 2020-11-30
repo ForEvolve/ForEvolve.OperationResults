@@ -2,7 +2,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace ForEvolve.OperationResults.AspNetCore.Mvc
+namespace ForEvolve.OperationResults.AspNetCore
 {
     /// <summary>
     /// Represents a wrapper message around an <see cref="Exception"/>.
