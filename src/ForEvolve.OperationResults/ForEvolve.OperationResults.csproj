@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0</TargetFrameworks>
-    <Description>This package contains an operation result generic implementation that should fits most needs.</Description>
-    <PackageTags>forevolve,aspnetcore,asp.net,core,aspnet,asp,operation,result,results,message,exception</PackageTags>
+    <Description>Generic implementation of the operation result pattern that should fits most needs.</Description>
+    <PackageTags>forevolve,aspnetcore,asp.net,core,aspnet,asp,operation,result,results,message,exception,net5</PackageTags>
   </PropertyGroup>
 
 </Project>

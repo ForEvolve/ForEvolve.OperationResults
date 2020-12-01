@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0</TargetFrameworks>
-    <Description>This package contains an operation result helpers for Asp.Net Core MVC and MediatR; for example: automatic validation.</Description>
-    <PackageTags>forevolve,aspnetcore,mvc,filters,asp.net,core,aspnet,asp,operation,result,results,message,exception</PackageTags>
+    <Description>Extensions of ForEvolve.OperationResults ASP.NET Core. Adds support for ProblemDetails and includes a ModelBinderErrorActionFilter.</Description>
+    <PackageTags>forevolve,aspnetcore,mvc,filters,asp.net,core,aspnet,asp,operation,result,results,message,exception,net5</PackageTags>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
