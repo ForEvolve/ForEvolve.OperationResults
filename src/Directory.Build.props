@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Authors>Carl-Hugo Marcotte</Authors>
     <Company>ForEvolve</Company>
-    <PackageProjectUrl>https://github.com/ForEvolve/StateR</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve.OperationResults</PackageProjectUrl>
     <License>MIT</License>
     <Copyright>Carl-Hugo Marcotte</Copyright>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
