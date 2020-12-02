@@ -38,7 +38,6 @@ env:
 
 jobs:
   build-and-test:
-    if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -47,16 +46,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+        if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
 
       - name: Setup .NET Core
+        if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
       - name: Build
+        if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
         run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
 
       - name: Unit Test
+        if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
         run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }}
 
   deploy:
