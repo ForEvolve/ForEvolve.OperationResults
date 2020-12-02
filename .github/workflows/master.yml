@@ -35,9 +35,6 @@ env:
   BUILD_CONFIGURATION: Release
   FEEDZ_URI: https://f.feedz.io/forevolve/operationresults/nuget/index.json
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-  IS_REPO_DISPATCH: ${{ github.event_name == 'repository_dispatch' }}
-  IS_WORKFLOW_DISPATCH: ${{ github.event_name == 'workflow_dispatch' }}
-  IS_NOT_DISPATCH: ${{ github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch' }}
 
 jobs:
   build-and-test:
@@ -46,10 +43,10 @@ jobs:
       fail-fast: false
       matrix:
         dotnet: ['5.0.x']
+    env:
+      IS_NOT_DISPATCH: ${{ github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch' }}
 
     steps:
-      - run: echo -e "IS_REPO_DISPATCH:" ${{ env.IS_REPO_DISPATCH }} "\nIS_WORKFLOW_DISPATCH:" ${{ env.IS_WORKFLOW_DISPATCH }} "\nIS_NOT_DISPATCH:" ${{ env.IS_NOT_DISPATCH }}
-
       - uses: actions/checkout@v1
         if: env.IS_NOT_DISPATCH
 
@@ -74,6 +71,9 @@ jobs:
       fail-fast: true
       matrix:
         dotnet: ['5.0.x']
+    env:
+      PUSH_TO_FEEDZ: github.event_name == 'pull_request' || (github.event_name == 'repository_dispatch' && github.event.client_payload.feedz == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToFeedz == 'true')
+      PUSH_TO_NUGET: github.event_name == 'push' || (github.event_name == 'repository_dispatch' && github.event.client_payload.nuget == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToNuget == 'true')
 
     steps:
       - uses: actions/checkout@v1
@@ -94,8 +94,8 @@ jobs:
 
       - name: Push to feedz.io
         run: dotnet nuget push **/*.nupkg -k ${{ secrets.FEEDZ_API_KEY }} -s ${{ env.FEEDZ_URI }}
-        if: github.event_name == 'pull_request' || (env.IS_REPO_DISPATCH && github.event.client_payload.feedz == true) || (env.IS_WORKFLOW_DISPATCH && github.event.inputs.deployToFeedz == 'true')
+        if: env.PUSH_TO_FEEDZ
 
       - name: Push to NuGet.org
         run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
-        if: github.event_name == 'push' || (env.IS_REPO_DISPATCH && github.event.client_payload.nuget == true) || (env.IS_WORKFLOW_DISPATCH && github.event.inputs.deployToNuget == 'true')
+        if: env.PUSH_TO_NUGET
