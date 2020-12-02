@@ -71,9 +71,6 @@ jobs:
       fail-fast: true
       matrix:
         dotnet: ['5.0.x']
-    env:
-      PUSH_TO_FEEDZ: github.event_name == 'pull_request' || (github.event_name == 'repository_dispatch' && github.event.client_payload.feedz == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToFeedz == 'true')
-      PUSH_TO_NUGET: github.event_name == 'push' || (github.event_name == 'repository_dispatch' && github.event.client_payload.nuget == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToNuget == 'true')
 
     steps:
       - uses: actions/checkout@v1
@@ -94,8 +91,8 @@ jobs:
 
       - name: Push to feedz.io
         run: dotnet nuget push **/*.nupkg -k ${{ secrets.FEEDZ_API_KEY }} -s ${{ env.FEEDZ_URI }}
-        if: env.PUSH_TO_FEEDZ
+        if: github.event_name == 'pull_request' || (github.event_name == 'repository_dispatch' && github.event.client_payload.feedz == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToFeedz == 'true')
 
       - name: Push to NuGet.org
         run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
-        if: env.PUSH_TO_NUGET
+        if: github.event_name == 'push' || (github.event_name == 'repository_dispatch' && github.event.client_payload.nuget == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToNuget == 'true')
