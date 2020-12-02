@@ -48,20 +48,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-        if: !env.IS_DISPATCH
+        if: ! env.IS_DISPATCH
 
       - name: Setup .NET Core
-        if: !env.IS_DISPATCH
+        if: ! env.IS_DISPATCH
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
       - name: Build
-        if: !env.IS_DISPATCH
+        if: ! env.IS_DISPATCH
         run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
 
       - name: Unit Test
-        if: !env.IS_DISPATCH
+        if: ! env.IS_DISPATCH
         run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }}
 
   deploy:
