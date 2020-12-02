@@ -48,7 +48,7 @@ jobs:
         dotnet: ['5.0.x']
 
     steps:
-      - run: echo -e "IS_REPO_DISPATCH:" ${{ env.IS_REPO_DISPATCH }} "\nIS_WORKFLOW_DISPATCH:" ${{ env.IS_WORKFLOW_DISPATCH }} "\nIS_DISPATCH:" ${{ env.IS_DISPATCH }} "\nIF:" ${{ env.IS_DISPATCH == false }}
+      - run: echo -e "IS_REPO_DISPATCH:" ${{ env.IS_REPO_DISPATCH }} "\nIS_WORKFLOW_DISPATCH:" ${{ env.IS_WORKFLOW_DISPATCH }} "\nIS_DISPATCH:" ${{ env.IS_DISPATCH }} "\nIF:" ${{ env.IS_DISPATCH == 0 }}
 
       - uses: actions/checkout@v1
         if: env.IS_DISPATCH == false
