@@ -47,7 +47,7 @@ jobs:
       IS_DISPATCH: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
 
     steps:
-      - run: echo ${{ IS_DISPATCH }}
+      - run: echo ${{ env.IS_DISPATCH }}
       - uses: actions/checkout@v1
         if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
 
