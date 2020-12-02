@@ -33,8 +33,10 @@ env:
   DOTNET_3_VERSION: '3.1.x'
   DOTNET_5_VERSION: '5.0.x'
   BUILD_CONFIGURATION: Release
-  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
   FEEDZ_URI: https://f.feedz.io/forevolve/operationresults/nuget/index.json
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  IS_REPO_DISPATCH: ${{ github.event_name == 'repository_dispatch' }}
+  IS_WORKFLOW_DISPATCH: ${{ github.event_name == 'workflow_dispatch' }}
 
 jobs:
   build-and-test:
@@ -44,9 +46,11 @@ jobs:
       matrix:
         dotnet: ['5.0.x']
     env:
-      IS_DISPATCH: ${{ github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch' }}
+      IS_DISPATCH: ${{ env.IS_REPO_DISPATCH || env.IS_WORKFLOW_DISPATCH }}
 
     steps:
+      - run: echo -e "IS_REPO_DISPATCH:" ${{ IS_REPO_DISPATCH }} "\nIS_WORKFLOW_DISPATCH:" ${{ IS_WORKFLOW_DISPATCH }} "\nIS_DISPATCH:" ${{ IS_DISPATCH }}
+
       - uses: actions/checkout@v1
         if: env.IS_DISPATCH == false
 
