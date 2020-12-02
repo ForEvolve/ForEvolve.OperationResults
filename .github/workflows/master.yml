@@ -44,25 +44,24 @@ jobs:
       matrix:
         dotnet: ['5.0.x']
     env:
-      IS_DISPATCH: ${{ github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch' }}
+      IS_DISPATCH: ${{ github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch' }}
 
     steps:
-      - run: echo ${{ env.IS_DISPATCH }}
       - uses: actions/checkout@v1
-        if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
+        if: !env.IS_DISPATCH
 
       - name: Setup .NET Core
-        if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
+        if: !env.IS_DISPATCH
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
       - name: Build
-        if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
+        if: !env.IS_DISPATCH
         run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
 
       - name: Unit Test
-        if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
+        if: !env.IS_DISPATCH
         run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }}
 
   deploy:
