@@ -37,7 +37,7 @@ env:
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
   IS_REPO_DISPATCH: ${{ github.event_name == 'repository_dispatch' }}
   IS_WORKFLOW_DISPATCH: ${{ github.event_name == 'workflow_dispatch' }}
-  IS_DISPATCH: ${{ github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch' }}
+  IS_NOT_DISPATCH: ${{ github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch' }}
 
 jobs:
   build-and-test:
@@ -48,23 +48,23 @@ jobs:
         dotnet: ['5.0.x']
 
     steps:
-      - run: echo -e "IS_REPO_DISPATCH:" ${{ env.IS_REPO_DISPATCH }} "\nIS_WORKFLOW_DISPATCH:" ${{ env.IS_WORKFLOW_DISPATCH }} "\nIS_DISPATCH:" ${{ env.IS_DISPATCH }} "\nIF:" ${{ env.IS_DISPATCH == "false" }}
+      - run: echo -e "IS_REPO_DISPATCH:" ${{ env.IS_REPO_DISPATCH }} "\nIS_WORKFLOW_DISPATCH:" ${{ env.IS_WORKFLOW_DISPATCH }} "\nIS_NOT_DISPATCH:" ${{ env.IS_NOT_DISPATCH }}
 
       - uses: actions/checkout@v1
-        if: env.IS_DISPATCH == false
+        if: env.IS_NOT_DISPATCH
 
       - name: Setup .NET Core
-        if: env.IS_DISPATCH == false
+        if: env.IS_NOT_DISPATCH
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
       - name: Build
-        if: env.IS_DISPATCH == false
+        if: env.IS_NOT_DISPATCH
         run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
 
       - name: Unit Test
-        if: env.IS_DISPATCH == false
+        if: env.IS_NOT_DISPATCH
         run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }}
 
   deploy:
