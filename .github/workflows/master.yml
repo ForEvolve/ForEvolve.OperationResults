@@ -43,8 +43,11 @@ jobs:
       fail-fast: false
       matrix:
         dotnet: ['5.0.x']
+    env:
+      IS_DISPATCH: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
 
     steps:
+      - run: echo ${{ IS_DISPATCH }}
       - uses: actions/checkout@v1
         if: github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch'
 
