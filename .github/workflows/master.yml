@@ -48,8 +48,6 @@ jobs:
         dotnet: ['5.0.x']
 
     steps:
-      - run: echo -e "IS_REPO_DISPATCH:" ${{ env.IS_REPO_DISPATCH }} "\nIS_WORKFLOW_DISPATCH:" ${{ env.IS_WORKFLOW_DISPATCH }} "\nIS_DISPATCH:" ${{ env.IS_DISPATCH }}
-
       - uses: actions/checkout@v1
         if: env.IS_DISPATCH == false
 
@@ -94,8 +92,8 @@ jobs:
 
       - name: Push to feedz.io
         run: dotnet nuget push **/*.nupkg -k ${{ secrets.FEEDZ_API_KEY }} -s ${{ env.FEEDZ_URI }}
-        if: github.event_name == 'pull_request' || (github.event_name == 'repository_dispatch' && github.event.client_payload.feedz == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToFeedz == 'true')
+        if: github.event_name == 'pull_request' || (env.IS_REPO_DISPATCH && github.event.client_payload.feedz == true) || (env.IS_WORKFLOW_DISPATCH && github.event.inputs.deployToFeedz == 'true')
 
       - name: Push to NuGet.org
         run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
-        if: github.event_name == 'push' || (github.event_name == 'repository_dispatch' && github.event.client_payload.nuget == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToNuget == 'true')
+        if: github.event_name == 'push' || (env.IS_REPO_DISPATCH && github.event.client_payload.nuget == true) || (env.IS_WORKFLOW_DISPATCH && github.event.inputs.deployToNuget == 'true')
