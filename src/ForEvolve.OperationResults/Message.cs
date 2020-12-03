@@ -42,13 +42,24 @@ namespace ForEvolve.OperationResults
         /// <param name="ignoreNull">if set to <c>true</c> null properties will be ignored (not added in the <see cref="IDictionary{string, object}"/>).</param>
         /// <exception cref="ArgumentNullException">details</exception>
         public Message(OperationMessageLevel severity, object details, bool ignoreNull = true)
+            : this(severity, details)
+        {
+            LoadDetails(details, ignoreNull);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Message"/> class.
+        /// </summary>
+        /// <param name="severity">The message severity.</param>
+        /// <param name="details">The message details that will be loaded in the <see cref="IDictionary{string, object}"/>.</param>
+        /// <exception cref="ArgumentNullException">details</exception>
+        protected Message(OperationMessageLevel severity, object details)
             : this(severity)
         {
             if (details == null) { throw new ArgumentNullException(nameof(details)); }
             Type = details.GetType();
             IsAnonymous = Type.Name.Contains("AnonymousType");
             OriginalObject = details;
-            LoadDetails(details, ignoreNull);
         }
 
         protected virtual void LoadDetails(object details, bool ignoreNull)

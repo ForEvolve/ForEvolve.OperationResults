@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ForEvolve.OperationResults.AspNetCore
 {
     /// <summary>
     /// Represents an operation result message build around [RFC3986] <see cref="OperationResults.ProblemDetails"/>.
-    /// Implements the <see cref="Message" />
+    /// Inherits from <see cref="Message" />
     /// </summary>
     /// <seealso cref="Message" />
     public class ProblemDetailsMessage : Message
@@ -18,6 +19,7 @@ namespace ForEvolve.OperationResults.AspNetCore
         /// Gets the problem details.
         /// </summary>
         /// <value>The problem details.</value>
+        [JsonIgnore]
         public ProblemDetails ProblemDetails { get; }
 
         /// <summary>
@@ -27,7 +29,7 @@ namespace ForEvolve.OperationResults.AspNetCore
         /// <param name="severity">The severity.</param>
         /// <exception cref="ArgumentNullException">problemDetails</exception>
         public ProblemDetailsMessage(ProblemDetails problemDetails, OperationMessageLevel severity)
-            : base(severity)
+            : base(severity, problemDetails)
         {
             ProblemDetails = problemDetails ?? throw new ArgumentNullException(nameof(problemDetails));
             LoadProblemDetails(problemDetails);
