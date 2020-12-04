@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>ForEvolve.OperationResults.AspNetCore</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ForEvolve.OperationResults.AspNetCore\ForEvolve.OperationResults.AspNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

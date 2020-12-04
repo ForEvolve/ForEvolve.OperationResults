@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+    <Description>Extensions of ForEvolve.OperationResults ASP.NET Core. Adds support for ProblemDetails and includes a ModelBinderErrorActionFilter.</Description>
+    <PackageTags>forevolve,aspnetcore,mvc,filters,asp.net,core,aspnet,asp,operation,result,results,message,exception,net5</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ForEvolve.OperationResults\ForEvolve.OperationResults.csproj" />
+  </ItemGroup>
+
+</Project>
