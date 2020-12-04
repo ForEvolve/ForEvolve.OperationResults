@@ -12,11 +12,13 @@ namespace Microsoft.AspNetCore.Mvc
     {
         public static IOperationResult ToOperationResult(this ProblemDetails problemDetails)
         {
+            if (problemDetails == null) { throw new ArgumentNullException(nameof(problemDetails)); }
             return ToOperationResult(problemDetails, OperationMessageLevel.Error);
         }
 
         public static IOperationResult ToOperationResult(this ProblemDetails problemDetails, OperationMessageLevel severity)
         {
+            if (problemDetails == null) { throw new ArgumentNullException(nameof(problemDetails)); }
             var result = new OperationResult();
             result.Messages.Add(new ProblemDetailsMessage(problemDetails, severity));
             return result;
@@ -24,11 +26,13 @@ namespace Microsoft.AspNetCore.Mvc
 
         public static IOperationResult<TValue> ToOperationResult<TValue>(ProblemDetails problemDetails)
         {
+            if (problemDetails == null) { throw new ArgumentNullException(nameof(problemDetails)); }
             return ToOperationResult<TValue>(problemDetails, OperationMessageLevel.Error);
         }
 
         public static IOperationResult<TValue> ToOperationResult<TValue>(ProblemDetails problemDetails, OperationMessageLevel severity)
         {
+            if (problemDetails == null) { throw new ArgumentNullException(nameof(problemDetails)); }
             var result = new OperationResult<TValue>();
             result.Messages.Add(new ProblemDetailsMessage(problemDetails, severity));
             return result;
